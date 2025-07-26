@@ -374,3 +374,28 @@ width: 100px;
       transform: scale(1.05);
       background: #f1ab14;
     }
+
+.order-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  width: 221px;
+  height: 55px;
+  background: linear-gradient(45deg, #FFC700, #FF6B00);
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.order-button:hover {
+  background: linear-gradient(45deg, #FF6B00, #FFC700);
+  transform: scale(1.05);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+}
