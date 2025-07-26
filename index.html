@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>PIZZA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <section class="header">
+    <div class="logo">PIZZA</div>
+    <nav>
+      <div class="page-title">Головна</div>
+      <section class="menu-item"><a href="#bs">Меню</a></section>
+      <section class="menu-item"><a href="#s">Контакти</a></section>
+    </nav>
+  </section>
+</header>
+
+<section class="intro">
+  <img src="https://img.freepik.com/premium-vector/special-pizza-cartoon-style_573652-458.jpg" alt="Pizza" class="intro-img">
+  <div class="intro-text">
+    <h1>Напої до піци</h1>
+    <p>Щоб замовити напій потрібно перейти в меню і натиснути кнопку "Замовити"</p>
+  </div>
+</section>
+
+<nav class="ab">
+  <a href="#bs"><section class="abc">Меню</section></a>
+</nav>
+
+<section class="menu-section">
+  <h2 id="bs">Меню</h2>
+  <!-- Напій 1 -->
+  <div class="menu-card">
+    <img class="menu-img" src="https://www.worldofsweets.de/out/pictures/master/product/1/coca-cola-330ml-no1-4004.jpg" alt="Coca Cola">
+    <div class="menu-text">
+      <h5>Coca cola</h5>
+      <p class="df">80 грн</p>
+      <a class="order-button" href="#">Замовити</a>
+    </div>
+  </div>
+  <!-- Напій 2 -->
+  <div class="menu-card">
+    <img class="menu-img" src="https://superalko.de/5340-superlarge_default/pepsi-cola-24x033cl.jpg" alt="Pepsi">
+    <div class="menu-text">
+      <h5>Pepsi</h5>
+      <p class="df">75 грн</p>
+      <a class="order-button" href="#">Замовити</a>
+    </div>
+  </div>
+
+<div class="menu-card">
+    <img class="menu-img" src="https://www.worldofsweets.de/out/pictures/master/product/1/sprite-zitrone-limette-330ml-no1-4451.jpg" alt="Pepsi">
+    <div class="menu-text">
+      <h5>Sprite</h5>
+      <p class="df">85 грн</p>
+      <a class="order-button" href="#">Замовити</a>
+    </div>
+  </div>
+
+<div class="menu-card">
+    <img class="menu-img" src="https://www.worldofsweets.de/out/pictures/master/product/1/fanta-orange-330ml-no1-4145.jpg" alt="Pepsi">
+    <div class="menu-text">
+      <h5>Fanta</h5>
+      <p class="df">79 грн</p>
+      <a class="order-button" href="#">Замовити</a>
+    </div>
+  </div>
+
+<div class="menu-card">
+    <img class="menu-img" src="https://my-sweet-usa.de/cdn/shop/products/1514.jpg?v=1645716488" alt="Pepsi">
+    <div class="menu-text">
+      <h5>Dr pepper</h5>
+      <p class="df">69 грн</p>
+      <a class="order-button" href="#">Замовити</a>
+    </div>
+  </div>
+  </section>
+<div id="orderConfirmationModal" class="modal">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <h4>Оформлення замовлення</h4>
+    <p id="selectedPizzaName"></p>
+    <p id="selectedPizzaPrice"></p>
+    <label for="pizzaQuantity">Кількість:</label>
+    <input type="number" id="pizzaQuantity" min="1" value="1">
+    <p id="totalPriceText">Загальна вартість: <span id="totalPrice">0 грн</span></p>
+    <button id="confirmOrderBtn">Підтвердити замовлення</button>
+  </div>
+</div>
+
+<section class="fbf">
+  <p id="s">+38(099) - 55 - 33-456</p>
+  <p>м. Львів, вул. Богдана Хмельницького 14</p>
+  <img src="https://i.postimg.cc/Z5vsdLYL/Chat-GPT-Image-24-2025-17-23-24.png" alt="Instagram" class="icon">
+  <img src="https://i.postimg.cc/dQBVb2Yn/20673.png" alt="Facebook" class="con">
+  <div class="container">
+    <button class="btn">1</button>
+    <button class="btn">2</button>
+  </div>
+</section>
+
+<script>
+  const modal = document.getElementById("orderConfirmationModal");
+  const closeButton = modal.querySelector(".close-button");
+  const orderButtons = document.querySelectorAll(".order-button");
+  const pizzaQuantityInput = document.getElementById("pizzaQuantity");
+  const totalPriceText = document.getElementById("totalPrice");
+  const selectedPizzaName = document.getElementById("selectedPizzaName");
+  const selectedPizzaPrice = document.getElementById("selectedPizzaPrice");
+  let currentPizzaPrice = 0;
+
+  orderButtons.forEach(button => {
+    button.addEventListener("click", function(e) {
+      e.preventDefault();
+      const card = this.closest(".menu-card");
+      const name = card.querySelector("h5").textContent;
+      const priceText = card.querySelector(".df").textContent;
+      const price = parseInt(priceText);
+      currentPizzaPrice = price;
+      selectedPizzaName.textContent = `Напій: ${name}`;
+      selectedPizzaPrice.textContent = `Ціна за один: ${price} грн`;
+      pizzaQuantityInput.value = 1;
+      totalPriceText.textContent = `${price} грн`;
+      modal.style.display = "flex";
+    });
+  });
+
+  function updateTotalPrice() {
+    const quantity = parseInt(pizzaQuantityInput.value);
+    const total = currentPizzaPrice * quantity;
+    totalPriceText.textContent = `${total} грн`;
+  }
+  pizzaQuantityInput.addEventListener("input", updateTotalPrice);
+
+  closeButton.addEventListener("click", () => modal.style.display = "none");
+  window.addEventListener("click", e => { if (e.target === modal) modal.style.display = "none"; });
+  document.getElementById("confirmOrderBtn").addEventListener("click", () => { alert("Дякуємо за замовлення! Очікуйте доставку."); modal.style.display = "none"; });
+</script>
+</body>
+</html>
